@@ -1,4 +1,4 @@
-from django.forms import fields, forms
+from django import forms
 from . import models
 
 class LoginForms(forms.Form):

@@ -1,3 +1,8 @@
 from django.urls import path
+from . import views
 
-urlpatterns = []
+app_name="diary"
+
+urlpatterns = [
+    path("", views.main, name="main")
+]
