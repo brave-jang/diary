@@ -1,0 +1,62 @@
+.accounts {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.accounts-title{
+    font-size: 60px;
+    text-align: center;
+    padding: 5%;
+}
+
+.accounts-box {
+    border: 1px black solid;
+    width: 30%;
+    height: 50%;
+    margin: auto;
+}
+
+.accounts-box__title {
+    border-bottom: 1px black solid;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.accounts-box__id {
+    width: 100%;
+    margin: 8% auto 8%;
+    text-align: center;
+}
+
+.accounts-box__id input {
+    width: 80%;
+    padding: 3%;
+    font-size: 100%;
+    border: 2px rgba(0, 0, 0, 0.2) solid;
+}
+
+.accounts-box__pw {
+    width: 100%;
+    margin: 8% auto 8% auto;
+    text-align: center;
+}
+
+.accounts-box__pw input {
+    width: 80%;
+    padding: 3%;
+    font-size: 100%;
+    border: 2px rgba(0, 0, 0, 0.2) solid;
+}
+
+.accounts-box__submit {
+    width: 100%;
+    margin: 8% auto 8%;
+    text-align: center;
+}
+
+.accounts-box__submit input{
+    width: 80%;
+    padding: 3%;
+    font-size: 100%;
+}

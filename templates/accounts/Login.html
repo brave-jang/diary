@@ -1,0 +1,24 @@
+{% extends "Layout.html" %} 
+
+{% block contents %}
+<div class="accounts">
+    <div class="accounts-title">
+        <h1>나만의 일기장</h1>
+    </div>
+    <form method="POST" action="{% url 'accounts:login' %}">
+        {% csrf_token %}
+        <div class="accounts-box">
+            <div class="accounts-box__title">로그인</div>
+            <div class="accounts-box__id">
+                <input type="text" placeholder="아이디" name="username"/> 
+            </div>
+            <div class="accounts-box__pw"> 
+                <input type="password" placeholder="비밀번호" name="password"/> 
+            </div>
+            <div class="accounts-box__submit">
+                <input type="submit" value="로그인"/>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
