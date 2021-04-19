@@ -5,19 +5,28 @@
     <div class="accounts-title">
         <h1>나만의 일기장</h1>
     </div>
-    <form method="POST" action="{% url 'accounts:login' %}">
+    <form method="POST" action="{% url 'accounts:signup' %}">
         {% csrf_token %}
         <div class="accounts-box">
-            <div class="accounts-box__title">로그인</div>
+            <div class="accounts-box__title">회원가입</div>
             <div class="accounts-box__id">
                 <input type="text" placeholder="아이디" name="username"/> 
             </div>
             <div class="accounts-box__pw"> 
                 <input type="password" placeholder="비밀번호" name="password"/> 
             </div>
+            <div class="accounts-box__pw"> 
+                <input type="password" placeholder="비밀번호 확인" name="password1"/> 
+            </div>
+            <div class="accounts-box__id">
+                <input type="text" placeholder="이름" name="first_name"/> 
+            </div>
+            <div class="accounts-box__id"> 
+                <input type="text" placeholder="나이" name="age"/> 
+            </div>
             {% include "partials/message.html" %}
             <div class="accounts-box__submit">
-                <input type="submit" value="로그인"/>
+                <input type="submit" value="회원가입"/>
             </div>
         </div>
     </form>
