@@ -4,10 +4,23 @@ from django.shortcuts import render
 
 
 def main(request):
-    month_days = calendar.monthcalendar(2021, 4)
+    today = str(date.today())
+    cal = today.split("-")
+    year, month, day = cal[0], cal[1], cal[2]
+    month_days = calendar.monthcalendar(int(year), int(month))
     days = [0,]
     for week_days in month_days:
         for week_day in week_days:
             days.append(week_day)
-    print(date.today())
-    return render(request, "diary/main.html", {'days':days})
+    return render(request, "diary/main.html", {'days':days, 
+            'year':year, 'month':month, 'day':day,})
+
+
+def add_month(request, year, month):
+    month_days = calendar.monthcalendar(int(year), int(month))
+    days = [0,]
+    for week_days in month_days:
+        for week_day in week_days:
+            days.append(week_day)
+    return render(request, "diary/main.html", {'days':days, 
+            'year':year, 'month':month,})

@@ -1,4 +1,10 @@
-.calendar{
+.calendar {
+    width: 100%;
+}
+.calendar-title{
+    display: flex;
+}
+.calendar-content{
     display: flex;
     flex-wrap: wrap;
     width: 30%;

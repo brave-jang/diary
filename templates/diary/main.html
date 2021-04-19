@@ -2,12 +2,37 @@
 
 {% block contents %}
 <div class="calendar">
- {% for day in days %}
-    {% if day != 0 %}
-        <div class="days">{{day}}</div>
-    {% else %}
-        <div class="days"></div>
-    {% endif %}
- {% endfor %}
+    <form method="POST" action="{% url 'diary:main' %}"> 
+        {% csrf_token %}
+        <div class="calendar-title">
+            {% if month > 1 %}
+            <a href="{% url 'diary:main' %}{{year}}/{{month|add:'-1'}}"><<</a>
+            {% else %}
+            <a href="{% url 'diary:main' %}{{year|add:'-1'}}/12"><<</a>
+            {% endif %}
+        <div> {{year}} / {{month}}</div>
+            {% if month < 12 %}
+            <a href="{% url 'diary:main' %}{{year}}/{{month|add:'1'}}">>></a>
+            {% else %}
+            <a href="{% url 'diary:main' %}{{year|add:'1'}}/1">>></a>
+            {% endif %}
+        </div>
+    </form>
+    <div class="calendar-content">
+        <div class="days">일</div>
+        <div class="days">월</div>
+        <div class="days">화</div>
+        <div class="days">수</div>
+        <div class="days">목</div>
+        <div class="days">금</div>
+        <div class="days">토</div>
+    {% for day in days %}
+        {% if day != 0 %}
+            <div class="days">{{day}}</div>
+        {% else %}
+            <div class="days"></div>
+        {% endif %}
+    {% endfor %}
+    </div>
 </div>
 {% endblock %}
