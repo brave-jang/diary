@@ -7,18 +7,23 @@
     </div>
     <form method="POST" action="{% url 'accounts:login' %}">
         {% csrf_token %}
-        <div class="accounts-box">
-            <div class="accounts-box__title">로그인</div>
-            <div class="accounts-box__id">
-                <input type="text" placeholder="아이디" name="username"/> 
+        <div class="accounts-content">
+            <div class="accounts-box">
+                <div class="accounts-box__title">로그인</div>
+                <div class="accounts-box__id">
+                    <input type="text" placeholder="아이디" name="username"/> 
+                </div>
+                <div class="accounts-box__pw"> 
+                    <input type="password" placeholder="비밀번호" name="password"/> 
+                </div>
+                <div class="accounts-box__submit">
+                    <input type="submit" value="로그인"/>
+                </div>
+                {% include "partials/message.html" %}
             </div>
-            <div class="accounts-box__pw"> 
-                <input type="password" placeholder="비밀번호" name="password"/> 
-            </div>
-            {% include "partials/message.html" %}
-            <div class="accounts-box__submit">
-                <input type="submit" value="로그인"/>
-            </div>
+            <div class="accounts-signup">
+                <a href="{% url 'accounts:signup' %}">회원가입 하러가기</a>
+            </div>    
         </div>
     </form>
 </div>

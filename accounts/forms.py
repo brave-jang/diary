@@ -40,7 +40,6 @@ class SignupForm(forms.ModelForm):
     def clean_password(self):
         password = self.cleaned_data.get("password")
         password1 = self.cleaned_data.get("password1")
-        print(self.cleaned_data)
         if password != password1:
             self.add_error("password", forms.ValidationError("패스워드가 다릅니다."))
         else:

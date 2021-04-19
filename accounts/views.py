@@ -5,17 +5,17 @@ from .forms import LoginForms, SignupForm
 
 def Login(request):
     if request.method == 'POST':
-        user = LoginForms(request.POST)
-        if user.is_valid():
-            username = user.cleaned_data['username']
-            password = user.cleaned_data['password']
+        form = LoginForms(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             login(request,user)
             return redirect("diary:main")
         else:
-            messages.error(request, "아이디가 존재하지 않거나 패스워드가 틀립니다!")
-            return render(request, "accounts/Login.html")
+            return render(request, "accounts/Login.html", {'form':form})
     else:
+        form = LoginForms()
         return render(request, "accounts/Login.html")
 
 
