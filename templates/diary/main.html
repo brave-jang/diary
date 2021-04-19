@@ -1,5 +1,13 @@
 {% extends "Layout.html" %} 
 
 {% block contents %}
-메인이라능
+<div class="calendar">
+ {% for day in days %}
+    {% if day != 0 %}
+        <div class="days">{{day}}</div>
+    {% else %}
+        <div class="days"></div>
+    {% endif %}
+ {% endfor %}
+</div>
 {% endblock %}
