@@ -28,6 +28,7 @@ def Detailcalendar(request, year, month):
     cal = today.split("-")
     today_year, today_month, today_day = cal[0], cal[1], cal[2]
     month_days = calendar.monthcalendar(int(year), int(month))
+    todo_list = todoModel.objects.filter(user=request.user)
     days = [0,]
     for week_days in month_days:
         for week_day in week_days:
@@ -35,7 +36,7 @@ def Detailcalendar(request, year, month):
     days.pop()
     return render(request, "diary/calendar.html", {'days':days, 
             'year':year, 'month':month,'today_year':today_year,
-            'today_month':today_month, 'today_day':today_day})
+            'today_month':today_month, 'today_day':today_day, 'todo_list':todo_list})
 
 
 def write_todo(request):

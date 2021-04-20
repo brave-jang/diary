@@ -1,9 +1,10 @@
 .calendar {
     display: flex;
+    justify-content: center;
 }
 
 .calendar_detail {
-    width: 70%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,9 +33,10 @@
 
 .days {
     width: 14%;
-    height: 80px;
+    height: 28px;
     text-align: center;
     border: 1px solid black;
+    font-size: 28px;
 }
 
 .days_day {

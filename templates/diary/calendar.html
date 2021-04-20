@@ -9,7 +9,7 @@
                 {% else %}
                 <a href="{% url 'diary:Detailcalendar' year|add:'-1' 12 %}"><<</a>
                 {% endif %}
-            <div> {{year}}/{{month}}</div>
+            <div style="margin: 0 15px;"> {{year}} / {{month}} </div>
                 {% if month|add:'0' < 12 %}
                 <a href="{% url 'diary:Detailcalendar' year month|add:'1' %}">>></a>
                 {% else %}
@@ -28,15 +28,21 @@
             {% if day != 0 %}
                 <div class="days_day">
                     <p>{{day}}</p>
+                    {% for list in todo_list %}
+                        {% if year|add:'0' == list.start_date|date:'Y'|add:'0' %}
+                            {% if month|add:'0' == list.start_date|date:'m'|add:'0' %}
+                                {% if day|add:'0' == list.start_date|date:'d'|add:'0' %}
+                                    <p>{{list.todo}}</p>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
                 </div>
             {% else %}
                 <div class="days_day"></div>
             {% endif %}
         {% endfor %}
         </div>
-    </div>
-    <div>
-        오늘 할 일 {{today_year}}/{{today_month}}/{{today_day}}
     </div>
 </div>
 {% endblock %}
