@@ -11,13 +11,12 @@
     <title>나만의 일기장</title>
   </head>
   <body>
+    <div class="header">
+      <a href="{% url 'diary:main' %}">메인</a>
+      <a href="{% url 'diary:todo' %}">일정 만들기</a>
+      <a href="{% url 'diary:Detailcalendar' year month %}">달력보기</a>
+    </div>
     {% block contents %}
     {% endblock %}
-    <script>
-      let year = today.getFullYear(); // 년도
-      let month = today.getMonth() + 1;  // 월
-      let date = today.getDate();  // 날짜
-      let day = today.getDay();  // 요일
-    </script>
   </body>
 </html>

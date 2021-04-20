@@ -1,0 +1,49 @@
+.calendar {
+    display: flex;
+}
+
+.calendar_detail {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.calendar-title{
+    display: flex;
+    width: 98%;
+    justify-content: center;
+    margin: 3%;
+    font-size: 30px;
+}
+
+.calendar-title a {
+    text-decoration: none;
+}
+
+.calendar-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 98%;
+    margin: 3%;
+    font-size: 20px;
+}
+
+.days {
+    width: 14%;
+    height: 80px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.days_day {
+    width: 14%;
+    height: 160px;
+    border: 1px solid black;
+    font-size: 25px;
+}
+
+.days_day p {
+    margin: 5px;
+}

@@ -5,6 +5,6 @@ app_name="diary"
 
 urlpatterns = [
     path("", views.main, name="main"),
-    path("<int:year>/<int:month>", views.add_month, name="add_month"),
-    path("write/", views.write_diary, name="write")
+    path("<int:year>/<int:month>/", views.Detailcalendar, name="Detailcalendar"),
+    path("todo/", views.write_todo, name="todo")
 ]

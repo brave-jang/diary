@@ -1,0 +1,35 @@
+{% extends "Layout.html" %} 
+
+{% block contents %}
+<div class="todo">
+    <form method="POST" action="{% url 'diary:todo' %}">
+        {% csrf_token %}
+        <div class="todo-write">
+            할 일 입력
+                <div>
+                    <input type="text" name="todo"/>
+                    시작일:<input type="date" value="{{year}}-{{month}}-{{day}}" name="start_date"/>
+                    종료일:<input type="date" value="{{year}}-{{month}}-{{day}}" name="end_date"/>
+                </div>
+                <input type="submit" value="완료" />
+        </div>
+    </form>
+    <div>
+        해야 할 일
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% for todo in todo_list %}
+    <div>
+        {{todo.todo}}
+        {{todo.start_date}}
+        {{todo.end_date}}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,45 +1,44 @@
-.calendar {
+.main {
+    margin-top: 40px;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-}
-.calendar-title{
-    display: flex;
-    width: 98%;
-    justify-content: center;
-    margin: 5%;
-    font-size: 30px;
-}
-
-.calendar-title a {
-    text-decoration: none;
-}
-
-.calendar-content{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 98%;
-    margin: 3%;
     font-size: 20px;
 }
 
-.days {
-    width: 14%;
-    height: 80px;
+.main-box {
+    width: 30%;
+    border: 1px solid black;
+}
+
+.main-title {
+    border-bottom: 1px solid black;
     text-align: center;
-    border: 1px solid black;
+    font-size: 30px;
+    font-weight: 800;
+    padding: 20px;
 }
 
-.days_day {
-    width: 14%;
-    height: 160px;
-    border: 1px solid black;
+.main-subtitle {
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
     font-size: 25px;
+    padding: 15px;
 }
 
-.days_day p {
-    margin: 5px;
+.main-subtitle p {
+    text-align: center;
+    width: 31%;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.content_box {
+    text-align: center;
+    width: 31%;
+    margin: 10px 0 10px 0;
 }

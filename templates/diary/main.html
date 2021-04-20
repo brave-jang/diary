@@ -1,36 +1,75 @@
 {% extends "Layout.html" %} 
 
 {% block contents %}
-<a href="{% url 'diary:write' %}">글쓰기</a>
-<div class="calendar">
-        <div class="calendar-title">
-            {% if month|add:'0' > 1 %}
-            <a href="{% url 'diary:main' %}{{year}}/{{month|add:'-1'}}"><<</a>
-            {% else %}
-            <a href="{% url 'diary:main' %}{{year|add:'-1'}}/12"><<</a>
-            {% endif %}
-        <div> {{year}}/{{month}}</div>
-            {% if month|add:'0' < 12 %}
-            <a href="{% url 'diary:main' %}{{year}}/{{month|add:'1'}}">>></a>
-            {% else %}
-            <a href="{% url 'diary:main' %}{{year|add:'1'}}/1">>></a>
-            {% endif %}
+<div class="main">
+    <div class="main-box">
+        <div class="main-title">
+            어제 할 일
         </div>
-    <div class="calendar-content">
-        <div class="days">일</div>
-        <div class="days">월</div>
-        <div class="days">화</div>
-        <div class="days">수</div>
-        <div class="days">목</div>
-        <div class="days">금</div>
-        <div class="days">토</div>
-    {% for day in days %}
-        {% if day != 0 %}
-            <div class="days_day"><p>{{day}}</p></div>
-        {% else %}
-            <div class="days_day"></div>
-        {% endif %}
-    {% endfor %}
+        <div class="main-subtitle">
+            <p>할 일</p> 
+            <p>시작일</p>
+            <p>종료일</p>
+        </div>
+        {% for list in yester_list %}
+        <div class="main-content">
+            <div class="content_box">
+                {{list.todo}}
+            </div>
+            <div class="content_box">
+                {{list.start_date|date:'Y-m-d'}}
+            </div>
+            <div class="content_box">
+                {{list.end_date|date:'Y-m-d'}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="main-box">
+        <div class="main-title">
+            오늘 할 일 ({{month}}/{{day}})
+        </div>
+        <div class="main-subtitle">
+            <p>할 일</p> 
+            <p>시작일</p>
+            <p>종료일</p>
+        </div>
+        {% for list in today_list %}
+        <div class="main-content">
+            <div class="content_box">
+                {{list.todo}}
+            </div>
+            <div class="content_box">
+                {{list.start_date|date:'Y-m-d'}}
+            </div>
+            <div class="content_box">
+                {{list.end_date|date:'Y-m-d'}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="main-box">
+        <div class="main-title">
+            내일 할 일
+        </div>
+        <div class="main-subtitle">
+            <p>할 일</p> 
+            <p>시작일</p>
+            <p>종료일</p>
+        </div>
+        {% for list in tomorrow_list %}
+        <div class="main-content">
+            <div class="content_box">
+                {{list.todo}}
+            </div>
+            <div class="content_box">
+                {{list.start_date|date:'Y-m-d'}}
+            </div>
+            <div class="content_box">
+                {{list.end_date|date:'Y-m-d'}}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
