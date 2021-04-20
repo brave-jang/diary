@@ -40,10 +40,10 @@
                 <div class="days_day">
                     <p>{{day}}</p>
                     {% for list in todo_list %}
-                        {% if year|add:'0' == list.start_date|date:'Y'|add:'0' %}
-                            {% if month|add:'0' == list.start_date|date:'m'|add:'0' %}
-                                {% if day|add:'0' == list.start_date|date:'d'|add:'0' %}
-                                    <p>{{list.todo}}</p>
+                        {% if year|add:'0' == list.end_date|date:'Y'|add:'0' %}
+                            {% if month|add:'0' == list.end_date|date:'m'|add:'0' %}
+                                {% if day|add:'0' == list.end_date|date:'d'|add:'0' %}
+                                    <p style="color: blue;">{{list.todo}}({{list.start_date|date:'Y.m.d'}}~)</p>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
@@ -54,6 +54,33 @@
             {% endif %}
         {% endfor %}
         </div>
+    </div>
+    <div class="todo-info">
+        이번 달 성공률 : {{ success_rate }}%
+        <div>완료한 일</div>
+        {% for list in todo_list %}
+            {% if year|add:'0' == list.end_date|date:'Y'|add:'0' %}
+                {% if month|add:'0' == list.end_date|date:'m'|add:'0' %}
+                    {% if list.status == 'T' %}
+                    <li>{{list.todo}}</li>
+                    <a href="{% url 'diary:trans_todo' list.pk %}">완료취소</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <div>하지 못한 일</div>
+        {% for list in todo_list %}
+            {% if year|add:'0' == list.end_date|date:'Y'|add:'0' %}
+                {% if month|add:'0' == list.end_date|date:'m'|add:'0' %}
+                    {% if list.status == 'F' %}
+                        <li>
+                            {{list.todo}}
+                            <a href="{% url 'diary:trans_todo' list.pk %}">완료하기</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

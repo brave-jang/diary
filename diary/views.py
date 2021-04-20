@@ -1,8 +1,9 @@
 import calendar
+from datetime import datetime
 from datetime import date, timedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from .forms import todoForm
 from .models import todoModel
 
@@ -30,7 +31,12 @@ def Detailcalendar(request, year, month):
     cal = today.split("-")
     today_year, today_month, today_day = cal[0], cal[1], cal[2]
     month_days = calendar.monthcalendar(int(year), int(month))
+    month_begin = datetime.strptime(f"{year}-{month}-01", "%Y-%m-%d")
     todo_list = todoModel.objects.filter(user=request.user)
+    success_todo = todoModel.objects.filter(user=request.user)\
+                    .filter(end_date__gte=month_begin)\
+                    .filter(status="T")
+    success_rate = round(len(success_todo)/len(todo_list)*100, 1)
     days = [0,]
     for week_days in month_days:
         for week_day in week_days:
@@ -38,7 +44,8 @@ def Detailcalendar(request, year, month):
     days.pop()
     return render(request, "diary/calendar.html", {'days':days, 
             'year':year, 'month':month,'today_year':today_year,
-            'today_month':today_month, 'today_day':today_day, 'todo_list':todo_list})
+            'today_month':today_month, 'today_day':today_day, 'todo_list':todo_list,
+            'success_todo':success_todo, 'success_rate':success_rate})
 
 
 @login_required
@@ -63,3 +70,19 @@ def write_todo(request):
         forms = todoForm()
     return render(request, "diary/todo_write.html", { 
                 'year':year, 'month':month, 'day':day, 'todo_list':todo_list})
+
+
+@login_required
+def trans_todo(request, pk):
+    today = str(date.today())
+    cal = today.split("-")
+    year, month = cal[0], cal[1]
+    todo = todoModel.objects.get(pk=pk)
+    if todo.status == 'F':
+        todo.status = 'T'
+        todo.save()
+    else:
+        todo.status = 'F'
+        todo.save()
+    return redirect(reverse("diary:Detailcalendar", kwargs={"year":year, "month":month}))
+    

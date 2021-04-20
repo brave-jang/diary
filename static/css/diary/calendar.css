@@ -1,10 +1,10 @@
 .calendar {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .calendar_detail {
-    width: 90%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,11 +41,16 @@
 
 .days_day {
     width: 14%;
-    height: 160px;
+    min-height: 160px;
     border: 1px solid black;
     font-size: 25px;
 }
 
 .days_day p {
     margin: 5px;
+}
+
+.todo-info {
+    margin: 20px;
+    font-size: 22px;
 }
