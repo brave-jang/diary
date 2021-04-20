@@ -42,7 +42,8 @@ def write_todo(request):
     today = str(date.today())
     cal = today.split("-")
     year, month, day = cal[0], cal[1], cal[2]
-    todo_list = todoModel.objects.filter(user=request.user)
+    todo_list = todoModel.objects.filter(user=request.user)\
+        .filter(end_date__gte=date.today())
     if request.method == "POST":
         forms = todoForm(request.POST)
         if forms.is_valid():

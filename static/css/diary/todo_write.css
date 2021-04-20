@@ -1,11 +1,26 @@
 .todo {
     font-size: 30px;
+    margin: 40px;
 }
 
 .todo-write {
     margin-top: 30px;
 }
 
+.todo-write input {
+    height: 30px;
+    font-size: 23px;
+    margin: 10px;
+}
+
 .todo-write_memo {
     margin-top: 30px;
+}
+
+.todo-list {
+    margin-top: 50px;
+}
+
+.todo-list h1 {
+    margin: 14px;
 }
