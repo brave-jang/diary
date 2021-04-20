@@ -49,8 +49,13 @@ table {
 }
 
 .header {
+	display: flex;
 	padding: 20px;
 	border-bottom: 1px solid black;
+}
+
+.header-nav {
+	width: 80%;
 }
 
 .header a {
@@ -58,4 +63,13 @@ table {
 	color: black;
 	margin: 0 20px 0 20px;
 	font-size: 28px;
+}
+
+.header-user {
+	display: flex;
+	align-items: center;
+}
+
+.header-user p {
+	font-size: 20px;
 }

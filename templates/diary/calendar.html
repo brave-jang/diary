@@ -1,6 +1,17 @@
 {% extends "Layout.html" %} 
 
 {% block contents %}
+<div class="header">
+    <div class="header-nav">
+        <a href="{% url 'diary:main' %}">메인</a>
+        <a href="{% url 'diary:todo' %}">일정 만들기</a>
+        <a href="{% url 'diary:Detailcalendar' year month %}">달력보기</a>
+    </div>
+    <div class="header-user">
+        <p>{{request.user.first_name}}님. 어서오세요!</p>
+        <a href="{% url 'accounts:logout' %}">로그아웃</a>
+    </div>
+</div>
 <div class="calendar">
     <div class="calendar_detail">
             <div class="calendar-title">

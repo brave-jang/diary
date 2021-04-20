@@ -1,11 +1,12 @@
 import calendar
 from datetime import date, timedelta
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import todoForm
 from .models import todoModel
 
-
+@login_required
 def main(request):
     today = str(date.today())
     cal = today.split("-")
@@ -23,6 +24,7 @@ def main(request):
             'yester_list':yester_list, 'tomorrow_list': tomorrow_list})
 
 
+@login_required
 def Detailcalendar(request, year, month):
     today = str(date.today())
     cal = today.split("-")
@@ -39,6 +41,7 @@ def Detailcalendar(request, year, month):
             'today_month':today_month, 'today_day':today_day, 'todo_list':todo_list})
 
 
+@login_required
 def write_todo(request):
     today = str(date.today())
     cal = today.split("-")

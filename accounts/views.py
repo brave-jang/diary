@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from .forms import LoginForms, SignupForm
 
@@ -17,6 +17,11 @@ def Login(request):
     else:
         form = LoginForms()
         return render(request, "accounts/Login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("accounts:login")
 
 
 def Signup(request):
