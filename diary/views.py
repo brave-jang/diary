@@ -36,7 +36,10 @@ def Detailcalendar(request, year, month):
     success_todo = todoModel.objects.filter(user=request.user)\
                     .filter(end_date__gte=month_begin)\
                     .filter(status="T")
-    success_rate = round(len(success_todo)/len(todo_list)*100, 1)
+    try:
+        success_rate = round(len(success_todo)/len(todo_list)*100, 1)
+    except:
+        success_rate = 0
     days = [0,]
     for week_days in month_days:
         for week_day in week_days:
