@@ -12,8 +12,9 @@ def main(request):
     for week_days in month_days:
         for week_day in week_days:
             days.append(week_day)
+    days.pop()
     return render(request, "diary/main.html", {'days':days, 
-            'year':year, 'month':month, 'day':day,})
+            'year':year, 'month':month, 'day':day})
 
 
 def add_month(request, year, month):
@@ -22,5 +23,10 @@ def add_month(request, year, month):
     for week_days in month_days:
         for week_day in week_days:
             days.append(week_day)
+    days.pop()
     return render(request, "diary/main.html", {'days':days, 
             'year':year, 'month':month,})
+
+
+def write_diary(request):
+    return render(request, "diary/write.html")

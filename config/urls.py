@@ -4,9 +4,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("wkdrmfmt/", admin.site.urls),
     path("", include("accounts.urls")),
-    path("diary/", include("diary.urls")),
+    path("main/", include("diary.urls")),
 ]
 
 if settings.DEBUG:
