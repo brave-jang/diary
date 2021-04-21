@@ -9,8 +9,9 @@
 
 .todo-write input {
     height: 30px;
-    font-size: 23px;
+    font-size: 18px;
     margin: 10px;
+    padding: 10px;
 }
 
 .todo-write_memo {

@@ -19,27 +19,22 @@
         <div class="todo-write">
             <h1>기간 검색</h1>
                 <div>
-                    시작일:<input type="date" value="{{year}}-{{month}}-{{day}}" name="start_date"/> ~
-                    종료일:<input type="date" value="{{year}}-{{month}}-{{day}}" name="end_date"/>
+                    시작일:<input type="date"  name="start_date"/> ~
+                    종료일:<input type="date"  name="end_date"/>
                     <input type="submit" value="검색" />
                 </div>
         </div>
     </form>
     <div class="todo-list">
-        <h1>검색 결과</h1>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+        <h1>검색 결과 ({{start_date|date:'Y-m-d'}} ~ {{end_date|date:'Y-m-d'}})</h1>
+        {% include "partials/messages.html" %}
     </div>
     {% for todo in todo_list %}
     <div>
         {{todo.todo}}
         {{todo.start_date|date:'Y-m-d'}} ~
         {{todo.end_date|date:'Y-m-d'}}
+        <a href="{% url 'diary:delete' todo.pk %}">삭제하기</a>
     </div>
     {% endfor %}
 </div>

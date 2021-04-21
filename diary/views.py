@@ -83,7 +83,7 @@ def write_todo(request):
 def list_todo(request):
     today = str(date.today())
     cal = today.split("-")
-    year, month, day = cal[0], cal[1], cal[2]
+    year, month = cal[0], cal[1]
     if request.method == 'POST':
         forms = listForm(request.POST)
         if forms.is_valid():
@@ -92,10 +92,19 @@ def list_todo(request):
             todo_list = todoModel.objects.filter(user=request.user)\
                         .filter(end_date__gte=start_date)\
                         .filter(end_date__lte=end_date)
+            return render(request, "diary/todo_list.html", { 
+                'year':year, 'month':month, 'todo_list':todo_list,
+                'start_date':start_date, 'end_date':end_date})
     else:
         forms = listForm()
-    return render(request, "diary/todo_list.html", { 
-                'year':year, 'month':month, 'day':day, 'todo_list':todo_list})
+    return render(request, "diary/todo_list.html", {'year':year, 'month':month})
+
+@login_required
+def delete_todo(request, pk):
+    todo = todoModel.objects.get(pk=pk)
+    todo.delete()
+    messages.success(request, f"{todo.todo} 일정이 삭제 되었습니다!")
+    return redirect("diary:list")
 
 @login_required
 def trans_todo(request, pk):
