@@ -4,7 +4,7 @@ from datetime import date, timedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
-from .forms import todoForm
+from .forms import todoForm, listForm
 from .models import todoModel
 
 @login_required
@@ -15,7 +15,7 @@ def main(request):
     yesterday = date.today() - timedelta(1)
     tomorrow = date.today() + timedelta(1)
     yester_list = todoModel.objects.filter(user=request.user)\
-        .filter(end_date__gte=yesterday)
+        .filter(start_date__lte=yesterday)
     today_list = todoModel.objects.filter(user=request.user)\
         .filter(end_date__gte=date.today())
     tomorrow_list = todoModel.objects.filter(user=request.user)\
@@ -32,9 +32,14 @@ def Detailcalendar(request, year, month):
     today_year, today_month, today_day = cal[0], cal[1], cal[2]
     month_days = calendar.monthcalendar(int(year), int(month))
     month_begin = datetime.strptime(f"{year}-{month}-01", "%Y-%m-%d")
-    todo_list = todoModel.objects.filter(user=request.user)
+    end = calendar.monthrange(year, month)[1]
+    month_end = datetime.strptime(f"{year}-{month}-{end}", "%Y-%m-%d")
+    todo_list = todoModel.objects.filter(user=request.user)\
+                    .filter(end_date__gte=month_begin)\
+                    .filter(end_date__lte=month_end)
     success_todo = todoModel.objects.filter(user=request.user)\
                     .filter(end_date__gte=month_begin)\
+                    .filter(end_date__lte=month_end)\
                     .filter(status="T")
     try:
         success_rate = round(len(success_todo)/len(todo_list)*100, 1)
@@ -74,6 +79,23 @@ def write_todo(request):
     return render(request, "diary/todo_write.html", { 
                 'year':year, 'month':month, 'day':day, 'todo_list':todo_list})
 
+@login_required
+def list_todo(request):
+    today = str(date.today())
+    cal = today.split("-")
+    year, month, day = cal[0], cal[1], cal[2]
+    if request.method == 'POST':
+        forms = listForm(request.POST)
+        if forms.is_valid():
+            start_date = forms.cleaned_data.get('start_date')
+            end_date = forms.cleaned_data.get('end_date')
+            todo_list = todoModel.objects.filter(user=request.user)\
+                        .filter(end_date__gte=start_date)\
+                        .filter(end_date__lte=end_date)
+    else:
+        forms = listForm()
+    return render(request, "diary/todo_list.html", { 
+                'year':year, 'month':month, 'day':day, 'todo_list':todo_list})
 
 @login_required
 def trans_todo(request, pk):

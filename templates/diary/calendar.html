@@ -5,6 +5,7 @@
     <div class="header-nav">
         <a href="{% url 'diary:main' %}">메인</a>
         <a href="{% url 'diary:todo' %}">일정 만들기</a>
+        <a href="{% url 'diary:list' %}">일정 목록/삭제</a>
         <a href="{% url 'diary:Detailcalendar' year month %}">달력보기</a>
     </div>
     <div class="header-user">
@@ -40,12 +41,8 @@
                 <div class="days_day">
                     <p>{{day}}</p>
                     {% for list in todo_list %}
-                        {% if year|add:'0' == list.end_date|date:'Y'|add:'0' %}
-                            {% if month|add:'0' == list.end_date|date:'m'|add:'0' %}
-                                {% if day|add:'0' == list.end_date|date:'d'|add:'0' %}
-                                    <p style="color: blue;">{{list.todo}}({{list.start_date|date:'Y.m.d'}}~)</p>
-                                {% endif %}
-                            {% endif %}
+                        {% if day|add:'0' == list.end_date|date:'d'|add:'0' %}
+                            <p style="color: blue;">{{list.todo}}({{list.start_date|date:'Y.m.d'}}~)</p>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -57,28 +54,22 @@
     </div>
     <div class="todo-info">
         이번 달 성공률 : {{ success_rate }}%
-        <div>완료한 일</div>
+        <div class="todo-info__title">완료한 일</div>
         {% for list in todo_list %}
-            {% if year|add:'0' == list.end_date|date:'Y'|add:'0' %}
-                {% if month|add:'0' == list.end_date|date:'m'|add:'0' %}
-                    {% if list.status == 'T' %}
-                    <li>{{list.todo}}</li>
-                    <a href="{% url 'diary:trans_todo' list.pk %}">완료취소</a>
-                    {% endif %}
-                {% endif %}
+            {% if list.status == 'T' %}
+            <div class="todo-info__list">
+                <li>{{list.todo}}</li>
+                <a href="{% url 'diary:trans_todo' list.pk %}">완료취소</a> 
+            </div>
             {% endif %}
         {% endfor %}
-        <div>하지 못한 일</div>
+        <div class="todo-info__title">하지 못한 일</div>
         {% for list in todo_list %}
-            {% if year|add:'0' == list.end_date|date:'Y'|add:'0' %}
-                {% if month|add:'0' == list.end_date|date:'m'|add:'0' %}
-                    {% if list.status == 'F' %}
-                        <li>
-                            {{list.todo}}
-                            <a href="{% url 'diary:trans_todo' list.pk %}">완료하기</a>
-                        </li>
-                    {% endif %}
-                {% endif %}
+            {% if list.status == 'F' %}
+            <div class="todo-info__list">
+                <li>{{list.todo}}</li>
+                <a href="{% url 'diary:trans_todo' list.pk %}">완료하기</a> 
+            </div>
             {% endif %}
         {% endfor %}
     </div>

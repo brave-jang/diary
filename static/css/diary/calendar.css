@@ -54,3 +54,19 @@
     margin: 20px;
     font-size: 22px;
 }
+
+.todo-info__title {
+    margin-top: 60px;
+    font-size: 35px;
+}
+
+.todo-info__list {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.todo-info__list li {
+    margin-right: 20px;
+    font-size: 25px;
+}

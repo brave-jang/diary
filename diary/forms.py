@@ -11,3 +11,8 @@ class todoForm(forms.ModelForm):
             "start_date",
             "end_date",
         )
+
+
+class listForm(forms.Form):
+    start_date = forms.DateField()
+    end_date = forms.DateField()
