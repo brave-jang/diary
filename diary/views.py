@@ -3,6 +3,7 @@ from datetime import datetime
 from datetime import date, timedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import render, redirect, reverse
 from .forms import todoForm, listForm
 from .models import todoModel
@@ -15,11 +16,11 @@ def main(request):
     yesterday = date.today() - timedelta(1)
     tomorrow = date.today() + timedelta(1)
     yester_list = todoModel.objects.filter(user=request.user)\
-        .filter(start_date__lte=yesterday)
+        .filter(Q(end_date__gte=yesterday) & Q(start_date__lte=yesterday) & Q(status="F"))
     today_list = todoModel.objects.filter(user=request.user)\
-        .filter(end_date__gte=date.today())
+        .filter(Q(end_date__gte=date.today()) & Q(start_date__lte=date.today()) & Q(status="F"))
     tomorrow_list = todoModel.objects.filter(user=request.user)\
-        .filter(end_date__gte=tomorrow)
+        .filter(Q(end_date__gte=tomorrow) & Q(start_date__lte=tomorrow) & Q(status="F"))
     return render(request, "diary/main.html", { 
             'year':year, 'month':month, 'day':day, 'today_list':today_list,
             'yester_list':yester_list, 'tomorrow_list': tomorrow_list})
